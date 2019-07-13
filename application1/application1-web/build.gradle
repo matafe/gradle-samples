@@ -16,11 +16,21 @@ eclipse {
 	}
 }
 
+task webResources(type: Jar) {
+    classifier = 'resources'
+    extension = 'jar'
+    mkdir "META-INF/resources"
+    from "src/main/webapp"
+    into "META-INF/resources"
+}
 
 publishing {
     publications {
         mavenJavaWeb(MavenPublication) {
             from components.web
+        }        
+        mavenJavaWebResources(MavenPublication) {
+            artifact webResources
         }        
     }
 }

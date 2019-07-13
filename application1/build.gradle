@@ -3,6 +3,9 @@ subprojects {
     apply plugin: 'eclipse-wtp'
     apply plugin: 'maven-publish'
 
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
     repositories {
         mavenCentral()
         mavenLocal()
@@ -25,7 +28,9 @@ subprojects {
         manifest {
             attributes 'Implementation-Title': project.name, 
                     'Implementation-Version': project.version,
-                    'Build-Time': new Date().format('yyyy-MM-dd HH:mm:ss.SSS')
+                    'Built-By': System.getProperty('user.name'),
+                    'Build-Time': new Date().format('yyyy-MM-dd HH:mm:ss.SSS'),
+                    'Built-JDK': System.getProperty('java.version')
         }
     }           
 

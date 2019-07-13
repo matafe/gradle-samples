@@ -9,8 +9,8 @@ Full Eclipse WTP Multiproject working
 
 Now you can import the project into Eclipse IDE.
 
-# Build
-`./gradlew clean build publishToMavenLocal -si`
+# Full build and Local Publish
+`./gradlew clean build javadoc publishToMavenLocal -si`
 
 Check: ${user.dir}.m2/reposity/com/app1
 
