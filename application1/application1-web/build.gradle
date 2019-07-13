@@ -1,0 +1,26 @@
+apply plugin: 'war'
+
+dependencies {
+	// WTP: needs compile here to generate <dependent-module /> for core project
+ 	compile project(':application1-core')
+	compile 'com.google.inject.extensions:guice-servlet:4.0'
+	
+    compileOnly "javax.servlet:javax.servlet-api:3.0.1"    
+}
+
+eclipse {
+	wtp {
+		component {
+      		contextPath = '/application1'
+		}
+	}
+}
+
+
+publishing {
+    publications {
+        mavenJavaWeb(MavenPublication) {
+            from components.web
+        }        
+    }
+}
