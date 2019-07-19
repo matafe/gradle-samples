@@ -56,4 +56,12 @@ subprojects {
         }
     }    
 
+    task dev {
+        dependsOn 'cleanEclipse', 'eclipse'
+        doLast {
+            println '='.multiply(80)
+            println "Eclipse files for ${project.name} regenerated"
+            println '='.multiply(80)
+        }
+    }
 }

@@ -1,0 +1,72 @@
+apply plugin: 'java-library'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+	// Let's reuse the jsp from the application 1 :)
+	compile 'com.matafe.application1:application1-core:1.0.0-SNAPSHOT'
+	runtime 'com.matafe.application1:application1-web:1.0.0-SNAPSHOT:resources'
+	
+	compileOnly "javax.servlet:javax.servlet-api:3.0.1"    
+}
+
+defaultTasks 'clean', 'build', 'javadoc', 'publishToMavenLocal'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': project.name, 
+                'Implementation-Version': project.version,
+                'Built-By': System.getProperty('user.name'),
+                'Build-Time': new Date().format('yyyy-MM-dd HH:mm:ss.SSS'),
+                'Built-JDK': System.getProperty('java.version')
+    }
+}  
+
+eclipse {
+	wtp {
+		component {
+      		contextPath = '/application2'
+		}
+	}
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+        }           
+        mavenJavaWeb(MavenPublication) {
+            from components.web
+        }        
+    }
+}
+
+task dev {
+    dependsOn 'cleanEclipse', 'eclipse'
+    doLast {
+        println '='.multiply(80)
+        println "Eclipse files for ${project.name} regenerated"
+        println '='.multiply(80)
+    }
+}

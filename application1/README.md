@@ -5,12 +5,15 @@ Full Eclipse WTP Multiproject working
 * Application1 Web -> *WAR project (that uses the core jar)*
 
 # Eclipse
-`./gradlew clean cleanEclipse eclipse`
+
+`./gradlew dev`
 
 Now you can import the project into Eclipse IDE.
 
 # Full build and Local Publish
 `./gradlew`
+
+Check the default task for this build.
 
 Check: ${user.dir}.m2/reposity/com/matafe/application1
 
