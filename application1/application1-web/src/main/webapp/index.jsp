@@ -1,6 +1,10 @@
-<jsp:useBean id="appcore1" class="com.app1.core.App1CoreService"/>
+<jsp:useBean id="coreService1"
+	class="com.matafe.application1.core.CoreService" />
 <html>
-<p>Direct access to appcore1 ${appcore1.message}!</p>
+<p>
+	Direct access to appcore1:
+	<br/><i>${coreService1.message}</i>
+</p>
 <br>
-<a href="app1WebServlet">App1 Web Servlet</a>
+<a href="myWebServlet">Web Servlet (application 1)</a>
 </html>

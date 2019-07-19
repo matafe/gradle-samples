@@ -1,4 +1,4 @@
-package com.app1.web.servlet;
+package com.matafe.application1.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.app1.core.App1CoreService;
+import com.matafe.application1.core.CoreService;
 
 @Singleton
-@WebServlet(name = "App1WebServlet", description = "App1 Web Servlet", urlPatterns = "/app1WebServlet")
-public class App1WebServlet extends HttpServlet {
+@WebServlet(name = "MyWebServlet", description = "My Web Servlet", urlPatterns = "/myWebServlet")
+public class MyWebServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     @Inject
-    App1CoreService appCore1Service;
+    CoreService coreService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,7 +30,9 @@ public class App1WebServlet extends HttpServlet {
 	writer.println("<html>");
 	writer.println("<body>");
 	writer.println("<p>");
-	writer.println(appCore1Service.getMessage());
+	writer.println("<i>");
+	writer.println(coreService.getMessage());
+	writer.println("</i>");
 	writer.println("</p>");
 	writer.println("</body>");
 	writer.println("</html>");

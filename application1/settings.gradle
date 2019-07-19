@@ -1,2 +1,4 @@
 rootProject.name = 'application1'
 include 'application1-core', 'application1-web'
+
+enableFeaturePreview('STABLE_PUBLISHING')

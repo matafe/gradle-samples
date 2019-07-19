@@ -1,3 +1,5 @@
+defaultTasks 'clean', 'build', 'javadoc', 'publishToMavenLocal'
+
 subprojects {
     apply plugin: 'java-library'
     apply plugin: 'eclipse-wtp'
@@ -18,7 +20,6 @@ subprojects {
       implementation 'org.apache.logging.log4j:log4j-api:2.7'
       implementation 'org.apache.logging.log4j:log4j-core:2.7'
       implementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.7'
-
 
       testImplementation 'junit:junit:4.12'
       testImplementation 'org.hamcrest:hamcrest-core:1.3'
