@@ -1,1 +1,9 @@
 rootProject.name = 'application2-web'
+
+if (file('../application1').exists()){
+	include 'application1'
+	include 'application1:application1-core'
+	
+	project(':application1').projectDir = new File(settingsDir, '../application1')
+	project(':application1:application1-core').projectDir = new File(settingsDir, '../application1/application1-core')
+}

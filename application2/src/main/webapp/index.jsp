@@ -8,10 +8,14 @@
 <title>APP2</title>
 </head>
 <body>
+	<h1>APP2</h1>
 	<p>
-		Direct access to appcore1: <br />
+		Direct access to application 1 core service: <br />
 		<i>${coreService1.message}</i>
 	</p>
+	<br>
+	<a href="myWebServlet2">Web Servlet 2</a>	
+	<br>
 	<br>
 	<a href="app1.jsp">JSP from app1</a>(this jsp is on application1-web-resources.jar)
 </body>

@@ -12,9 +12,13 @@ repositories {
 }
 
 dependencies {
+	compile project(path: ':application1:application1-core')
+	
+	
+	//compile 'com.matafe.application1:application1-core:1.0.0-SNAPSHOT'
 	// Let's reuse the jsp from the application 1 :)
-	compile 'com.matafe.application1:application1-core:1.0.0-SNAPSHOT'
-	runtime 'com.matafe.application1:application1-web:1.0.0-SNAPSHOT:resources'
+	//runtime 'com.matafe.application1:application1-web:1.0.0-SNAPSHOT:resources'
+	
 	
 	compileOnly "javax.servlet:javax.servlet-api:3.0.1"    
 }
@@ -66,7 +70,7 @@ task dev {
     dependsOn 'cleanEclipse', 'eclipse'
     doLast {
         println '='.multiply(80)
-        println "Eclipse files for ${project.name} regenerated"
+        println "Eclipse files regenerated for ${project.name}"
         println '='.multiply(80)
     }
 }
