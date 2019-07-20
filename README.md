@@ -3,3 +3,4 @@
 Some gradle examples...
 
 * [Application 1](application1/README.md) - Full Eclipse WTP Multiproject (core + web) working.
+* [Application 2](application2/README.md) - Eclipse WTP (web) with some Application 1 dependencies.

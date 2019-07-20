@@ -15,7 +15,7 @@ Now you can import the project into Eclipse IDE.
 
 Check the default task for this build.
 
-Check: ${user.dir}.m2/reposity/com/matafe/application1
+Check: ${user.dir}/.m2/reposity/com/matafe/application1
 
 # Access
 http://localhost:8080/application1
