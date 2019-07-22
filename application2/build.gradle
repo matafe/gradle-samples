@@ -12,15 +12,14 @@ repositories {
 }
 
 dependencies {
-	compile project(path: ':application1:application1-core')
 	
+	compile "com.matafe.application1:application1-core:${application1Version}"
+	compile 'com.google.inject.extensions:guice-servlet:4.0'
+	compileOnly "javax.servlet:javax.servlet-api:3.0.1"
 	
-	//compile 'com.matafe.application1:application1-core:1.0.0-SNAPSHOT'
-	// Let's reuse the jsp from the application 1 :)
-	//runtime 'com.matafe.application1:application1-web:1.0.0-SNAPSHOT:resources'
-	
-	
-	compileOnly "javax.servlet:javax.servlet-api:3.0.1"    
+	//TODO: fix the resources -> META-INF/resources web.jar
+	// Now using eclipse.wtp.component.resource customized.
+	//runtime 'com.matafe.application1:application1-web:1.0.0-SNAPSHOT'    
 }
 
 defaultTasks 'clean', 'build', 'javadoc', 'publishToMavenLocal'
@@ -39,9 +38,13 @@ eclipse {
 	wtp {
 		component {
       		contextPath = '/application2'
+      		resource sourcePath: '../application1/application1-web/src/main/webapp', deployPath: '/'
 		}
 	}
 }
+
+
+
 
 task sourcesJar(type: Jar) {
     classifier = 'sources'
@@ -74,3 +77,5 @@ task dev {
         println '='.multiply(80)
     }
 }
+
+tasks.eclipse.dependsOn(cleanEclipse)

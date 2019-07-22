@@ -1,9 +1,12 @@
 rootProject.name = 'application2-web'
 
+// if the 'application1' was checkout last use as a dependend project
+// if not we'll use it as versioned dependency published.
 if (file('../application1').exists()){
-	include 'application1'
-	include 'application1:application1-core'
-	
-	project(':application1').projectDir = new File(settingsDir, '../application1')
-	project(':application1:application1-core').projectDir = new File(settingsDir, '../application1/application1-core')
+	includeBuild('../application1') {
+	    dependencySubstitution {
+	        substitute module('com.matafe.application1:application1-core') with project(':application1-core')
+	        substitute module('com.matafe.application1:application1-web')  with project(':application1-web')
+	    }    
+	}
 }
