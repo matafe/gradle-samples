@@ -1,4 +1,17 @@
+description = 'Application 1 Core Module'
 
 dependencies {
     implementation 'org.apache.commons:commons-collections4:4.4'
 }
+
+task buildInfoProps(type: WriteProperties) {
+    description = 'Generate a build info file with runtime information to be used by the application.'
+
+    outputFile file('build/resources/main/build-info.properties')
+    property 'project.name', "${project.name}"
+    property 'project.description', "${project.description}"
+    property 'project.version', "${project.version}"
+    property 'build.time', new Date().format('yyyy-MM-dd HH:mm:ss.SSS')
+}
+
+processResources.dependsOn buildInfoProps

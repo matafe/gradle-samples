@@ -1,27 +1,61 @@
 apply plugin: 'war'
 
+project.ext {
+	webAppDir = "${projectDir}/src/main/webapp"
+}	
+
 dependencies {
 	// WTP: needs compile here to generate <dependent-module /> for core project
  	compile project(':application1-core')
 	compile 'com.google.inject.extensions:guice-servlet:4.0'
 	
-    compileOnly "javax.servlet:javax.servlet-api:3.0.1"    
+    compileOnly 'javax.servlet:javax.servlet-api:3.0.1'    
 }
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java']
+        }
+        resources {
+            srcDirs = ['src/main/resources']
+        }
+    }
+    //webResources {
+        //resources.srcDir file('src/main/webapp')
+        ////output.resourcesDir += 'META-INF/resources'
+    //}    
+}
+
+//project.afterEvaluate {
+  //println "="*100
+  //println "source = " + sourceSets.webResources.output.resourcesDir
+  //println "="*100
+//}
 
 eclipse {
 	wtp {
 		component {
-      		contextPath = '/application1'
+      		contextPath = '/application1'      		
+      		//resource sourcePath: '/src/main/webapp', deployPath: '/META-INF/resources'
 		}
 	}
+	
 }
 
-task webResources(type: Jar) {
+task resourcesJar(type: Jar, overwrite: true) {
+    description = 'JAR WebApp'
     classifier = 'resources'
     extension = 'jar'
-    mkdir "META-INF/resources"
-    from "src/main/webapp"
-    into "META-INF/resources"
+    //from 'src/main/webapp'
+    //from sourceSets.webResources.output
+    //into "META-INF/resources"
+    metaInf {
+        from (project.ext.webAppDir) {
+            exclude '**/*web.xml'
+        }                            
+        into 'resources'
+    }        
 }
 
 publishing {
@@ -29,8 +63,9 @@ publishing {
         mavenJavaWeb(MavenPublication) {
             from components.web
         }        
-        mavenJavaWebResources(MavenPublication) {
-            artifact webResources
+        mavenJavaResources(MavenPublication) {
+            artifact resourcesJar
         }        
     }
 }
+
